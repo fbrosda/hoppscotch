@@ -33,6 +33,7 @@
 import { refAutoReset } from "@vueuse/core"
 import { useI18n } from "~/composables/i18n"
 import { useSetting } from "~/composables/settings"
+import { getDefaultSettings } from "~/newstore/settings"
 import IconRotateCCW from "~icons/lucide/rotate-ccw"
 import IconCheck from "~icons/lucide/check"
 import { useToast } from "~/composables/toast"
@@ -60,7 +61,7 @@ const clearIcon = refAutoReset<typeof IconRotateCCW | typeof IconCheck>(
 )
 
 const resetProxy = () => {
-  PROXY_URL.value = "https://proxy.hoppscotch.io/"
+  PROXY_URL.value = getDefaultSettings().PROXY_URL
   clearIcon.value = IconCheck
   toast.success(`${t("state.cleared")}`)
 }

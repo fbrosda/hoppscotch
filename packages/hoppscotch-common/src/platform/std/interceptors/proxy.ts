@@ -4,7 +4,7 @@ import * as E from "fp-ts/Either"
 import { preProcessRequest } from "./helpers"
 import { v4 } from "uuid"
 import axios from "axios"
-import { settingsStore } from "~/newstore/settings"
+import { getDefaultSettings, settingsStore } from "~/newstore/settings"
 import { decodeB64StringToArrayBuffer } from "~/helpers/utils/b64"
 import SettingsProxy from "~/components/settings/Proxy.vue"
 
@@ -55,7 +55,7 @@ async function runRequest(
   try {
     // TODO: Validation for the proxy result
     const { data } = await axios.post(
-      settingsStore.value.PROXY_URL ?? "https://proxy.hoppscotch.io",
+      settingsStore.value.PROXY_URL ?? getDefaultSettings().PROXY_URL,
       payload,
       {
         headers,

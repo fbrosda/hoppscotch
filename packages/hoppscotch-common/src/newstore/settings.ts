@@ -102,7 +102,7 @@ export const getDefaultSettings = (): SettingsDef => ({
   CURRENT_INTERCEPTOR_ID: "",
 
   // TODO: Interceptor related settings should move under the interceptor systems
-  PROXY_URL: "https://proxy.hoppscotch.io/",
+  PROXY_URL: import.meta.env.VITE_PROXY_URL ?? "https://proxy.hoppscotch.io/",
   URL_EXCLUDES: {
     auth: true,
     httpUser: true,

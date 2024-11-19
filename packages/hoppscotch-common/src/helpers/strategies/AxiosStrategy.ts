@@ -5,7 +5,7 @@ import * as TE from "fp-ts/TaskEither"
 import { cloneDeep } from "lodash-es"
 import { NetworkResponse, NetworkStrategy } from "../network"
 import { decodeB64StringToArrayBuffer } from "../utils/b64"
-import { settingsStore } from "~/newstore/settings"
+import { getDefaultSettings, settingsStore } from "~/newstore/settings"
 
 let cancelSource = axios.CancelToken.source()
 
@@ -103,7 +103,7 @@ const axiosWithProxy: NetworkStrategy = (req) =>
       TE.tryCatch(
         () =>
           axios.post(
-            settingsStore.value.PROXY_URL || "https://proxy.hoppscotch.io",
+            settingsStore.value.PROXY_URL || getDefaultSettings().PROXY_URL,
             payload,
             {
               headers,
